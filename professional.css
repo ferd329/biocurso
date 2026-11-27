@@ -1,0 +1,1020 @@
+/* =========================================================================
+   BioCursos — Capa de diseño profesional
+   Se carga después de styles.css. No modifica la lógica de la aplicación:
+   sólo refina tipografía, color, superficies, espaciado y estados.
+   Paleta: índigo (marca) · cian (acento) · slate (neutros).
+   ========================================================================= */
+
+/* ------------------------------------------------------------------ *
+ * 1. Tokens
+ * ------------------------------------------------------------------ */
+
+:root {
+  --pro-ink: #0b1220;
+  --pro-ink-2: #16203a;
+  --pro-muted: #5b6478;
+  --pro-muted-2: #7b8496;
+  --pro-line: #e6e9f2;
+  --pro-line-strong: #d5dae7;
+  --pro-canvas: #f6f7fb;
+  --pro-surface: #ffffff;
+
+  --pro-brand: #4f46e5;
+  --pro-brand-strong: #4338ca;
+  --pro-brand-deep: #3730a3;
+  --pro-brand-soft: #eef2ff;
+  --pro-brand-line: #c7d2fe;
+
+  --pro-accent: #0ea5e9;
+  --pro-success: #10b981;
+  --pro-warning: #f59e0b;
+  --pro-danger: #ef4444;
+
+  --pro-radius-sm: 10px;
+  --pro-radius: 14px;
+  --pro-radius-lg: 20px;
+  --pro-radius-xl: 26px;
+
+  --pro-shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --pro-shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px -16px rgba(16, 24, 40, 0.16);
+  --pro-shadow-md: 0 1px 2px rgba(16, 24, 40, 0.04), 0 16px 40px -20px rgba(16, 24, 40, 0.2);
+  --pro-shadow-lg: 0 2px 4px rgba(16, 24, 40, 0.04), 0 28px 70px -28px rgba(16, 24, 40, 0.26);
+
+  --pro-font-display: "Manrope", "DM Sans", Inter, system-ui, sans-serif;
+  --pro-font-body: "DM Sans", "Manrope", Inter, system-ui, sans-serif;
+}
+
+/* ------------------------------------------------------------------ *
+ * 2. Base tipográfica
+ * ------------------------------------------------------------------ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--pro-canvas);
+  color: var(--pro-ink);
+  font-size: 15px;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image:
+    radial-gradient(1200px 600px at 12% -10%, rgba(79, 70, 229, 0.06), transparent 60%),
+    radial-gradient(900px 500px at 88% 0%, rgba(14, 165, 233, 0.05), transparent 55%);
+  background-attachment: fixed;
+}
+
+h1,
+h2,
+h3,
+h4,
+.display-title {
+  font-family: var(--pro-font-display);
+  letter-spacing: -0.045em;
+  color: var(--pro-ink);
+  text-wrap: balance;
+}
+
+.display-title {
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+  font-size: clamp(2.35rem, 5.4vw, 4.15rem);
+}
+
+.eyebrow {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--pro-brand);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--pro-brand), transparent);
+}
+
+.serif-accent {
+  color: var(--pro-brand);
+  font-weight: 400;
+}
+
+::selection {
+  background: #ddd6fe;
+  color: #2e1065;
+}
+
+.container-page {
+  max-width: 1240px;
+}
+
+/* ------------------------------------------------------------------ *
+ * 3. Cabecera y navegación
+ * ------------------------------------------------------------------ */
+
+header.sticky {
+  background-color: rgba(255, 255, 255, 0.82) !important;
+  border-bottom-color: var(--pro-line) !important;
+  box-shadow: 0 1px 0 rgba(16, 24, 40, 0.04), 0 8px 24px -24px rgba(16, 24, 40, 0.25);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+}
+
+header.sticky::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--pro-brand), var(--pro-accent) 55%, var(--pro-success) 100%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.nav-link {
+  border-radius: 10px;
+  font-weight: 600;
+  color: var(--pro-muted);
+  transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+.nav-link:hover {
+  background: #f1f3f9;
+  color: var(--pro-ink);
+}
+
+.nav-link[aria-current="page"] {
+  color: var(--pro-brand-strong);
+  background: var(--pro-brand-soft);
+}
+
+/* ------------------------------------------------------------------ *
+ * 4. Botones, enlaces y focos
+ * ------------------------------------------------------------------ */
+
+button,
+[role="button"],
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.18s ease,
+    background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0.5px) scale(0.995);
+}
+
+:focus-visible {
+  outline: 2px solid var(--pro-brand);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* --- Reglas de contraste SOLO para botones con bg-white ---
+     Estas reglas son muy específicas y solo tocan botones
+     que estén dentro de un contenedor con bg-white. --- */
+.main-content button.bg-white,
+.main-content .bg-white button {
+  color: var(--pro-ink) !important;
+}
+
+/* SVG e imágenes: sin filtros, sin cambios de color */
+svg * {
+  color: inherit !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* Texto por defecto: sin overrides - usamos las clases originales de Tailwind */
+.text-white,
+.text-ink,
+.text-slate-500 {
+  /* Sin !important - dejamos que Tailwind gestione los colores */
+}
+
+/* Botones con clase dark o ink deben ser visibles */
+.dark\:text-white,
+.text-ink {
+  color: var(--pro-ink) !important;
+}
+
+/* ------------------------------------------------------------------ *
+ * 5. Superficies: tarjetas, paneles y bordes
+ * ------------------------------------------------------------------ */
+
+.rounded-2xl.border,
+.rounded-3xl.border,
+.rounded-\[20px\].border,
+.rounded-\[26px\].border {
+  border-color: var(--pro-line) !important;
+}
+
+.rounded-2xl.bg-white.border,
+.rounded-3xl.bg-white.border,
+.rounded-\[20px\].bg-white.border,
+.rounded-\[26px\].bg-white.border {
+  box-shadow: var(--pro-shadow-sm);
+}
+
+.shadow-soft {
+  box-shadow: var(--pro-shadow-sm) !important;
+}
+
+.shadow-lift {
+  box-shadow: var(--pro-shadow-md) !important;
+}
+
+.hover\:shadow-lift:hover {
+  box-shadow: var(--pro-shadow-lg) !important;
+}
+
+.shadow-sm {
+  box-shadow: var(--pro-shadow-xs) !important;
+}
+
+/* Tarjetas de curso */
+article.group {
+  position: relative;
+  border-color: var(--pro-line) !important;
+  box-shadow: var(--pro-shadow-sm);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+article.group::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--pro-brand), var(--pro-accent));
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+article.group:hover {
+  border-color: var(--pro-brand-line) !important;
+  box-shadow: var(--pro-shadow-md);
+}
+
+article.group:hover::after {
+  opacity: 1;
+}
+
+/* Brillo sutil sobre las portadas */
+article.group a:first-child > div::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.45) 0%, transparent 42%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+article.group:hover a:first-child > div::after {
+  opacity: 1;
+}
+
+/* Paneles de estadística / destacados */
+.bg-\[linear-gradient\(135deg\,\#0F172A_0\%\,\#1E293B_100\%\)\] {
+  background-image: linear-gradient(135deg, #0b1220 0%, #1e293b 100%) !important;
+}
+
+/* ------------------------------------------------------------------ *
+ * 6. Formularios
+ * ------------------------------------------------------------------ */
+
+input,
+textarea,
+select {
+  border-color: var(--pro-line-strong) !important;
+  border-radius: 10px;
+  background-color: #fff;
+  color: var(--pro-ink);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: #c3cadb !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--pro-brand) !important;
+  box-shadow: var(--pro-ring) !important;
+  outline: none !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #98a1b3;
+}
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--pro-danger) !important;
+}
+
+/* ------------------------------------------------------------------ *
+ * 7. Tablas
+ * ------------------------------------------------------------------ */
+
+.table-shell {
+  border-color: var(--pro-line) !important;
+  box-shadow: var(--pro-shadow-sm);
+}
+
+.table-base th {
+  background: #f8fafc !important;
+  color: var(--pro-muted) !important;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.table-base td {
+  border-color: #eef1f7 !important;
+  color: #46516a !important;
+}
+
+.table-base tbody tr:hover {
+  background: #f8fafc !important;
+}
+
+/* ------------------------------------------------------------------ *
+ * 8. Neutros de Tailwind alineados a la nueva paleta
+ * ------------------------------------------------------------------ */
+
+.bg-\[\#F8FAFC\] {
+  background-color: var(--pro-canvas) !important;
+}
+
+.bg-\[\#FBFCFD\] {
+  background-color: #fbfcff !important;
+}
+
+.bg-slate-50 {
+  background-color: #f7f8fc !important;
+}
+
+.bg-slate-100 {
+  background-color: #eef1f7 !important;
+}
+
+.border-slate-200 {
+  border-color: var(--pro-line) !important;
+}
+
+.border-slate-100 {
+  border-color: #eef1f7 !important;
+}
+
+.text-slate-500 {
+  color: var(--pro-muted) !important;
+}
+
+.text-slate-600 {
+  color: #475569 !important;
+}
+
+.text-slate-400 {
+  color: #8a93a6 !important;
+}
+
+.text-ink {
+  color: var(--pro-ink) !important;
+}
+
+/* ------------------------------------------------------------------ *
+ * 9. Barra lateral y tablas del panel de administración
+ * ------------------------------------------------------------------ */
+
+.admin-nav-link {
+  border-radius: 10px;
+  font-weight: 600;
+  color: #64708a;
+}
+
+.admin-nav-link:hover {
+  background: #ffffff;
+  color: var(--pro-ink);
+  box-shadow: var(--pro-shadow-xs);
+}
+
+.admin-nav-link-active {
+  background: #ffffff;
+  color: var(--pro-brand-strong);
+  box-shadow: var(--pro-shadow-xs);
+  box-shadow: inset 3px 0 0 var(--pro-brand), var(--pro-shadow-xs);
+}
+
+/* ------------------------------------------------------------------ *
+ * 10. Pie de página
+ * ------------------------------------------------------------------ */
+
+footer {
+  background: #fbfcff !important;
+  border-top-color: var(--pro-line) !important;
+}
+
+footer a {
+  transition: color 0.18s ease;
+}
+
+footer .text-slate-500,
+footer .text-slate-400 {
+  color: var(--pro-muted) !important;
+}
+
+/* ------------------------------------------------------------------ *
+ * 11. Animación de entrada
+ * ------------------------------------------------------------------ */
+
+@keyframes pro-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main > section,
+main > div > section {
+  animation: pro-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+main > section:nth-child(2),
+main > div > section:nth-child(2) {
+  animation-delay: 0.04s;
+}
+
+main > section:nth-child(3),
+main > div > section:nth-child(3) {
+  animation-delay: 0.08s;
+}
+
+main > section:nth-child(4),
+main > div > section:nth-child(4) {
+  animation-delay: 0.12s;
+}
+
+/* ------------------------------------------------------------------ *
+ * 12. Accesibilidad
+ * ------------------------------------------------------------------ */
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 200;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  background: var(--pro-ink);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  transform: translateY(-160%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+  color: #fff;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ------------------------------------------------------------------ *
+ * 13. Barra de desplazamiento
+ * ------------------------------------------------------------------ */
+
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7cedd;
+  border: 3px solid var(--pro-canvas);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9aa4b8;
+}
+
+/* ------------------------------------------------------------------ *
+ * 14. Movimiento reducido
+ * ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * 15. Ajustes móviles
+ * ------------------------------------------------------------------ */
+
+@media (max-width: 640px) {
+  body {
+    font-size: 14.5px;
+  }
+
+  .display-title {
+    letter-spacing: -0.045em;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * 16. Overrides de la home (Hero + tarjetas)
+ * ------------------------------------------------------------------ */
+
+/* Fondo con gradientes suaves */
+body {
+  background-color: #f4f6fb;
+  background-image:
+    radial-gradient(ellipse 900px 700px at 0% -15%, rgba(79, 70, 229, 0.11), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 102% 0%, rgba(14, 165, 233, 0.09), transparent 55%),
+    radial-gradient(ellipse 600px 500px at 55% 110%, rgba(16, 185, 129, 0.07), transparent 55%),
+    linear-gradient(185deg, #f8f9ff 0%, #f4f6fb 50%, #f1f8f5 100%);
+}
+
+/* Display-title con gradiente de texto en home */
+.display-title {
+  background: linear-gradient(145deg, #0b1220 0%, #1e1b4b 55%, #0b1220 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* El acento serif sigue siendo color brand */
+.serif-accent {
+  -webkit-text-fill-color: initial;
+  color: var(--pro-brand);
+}
+
+/* Cabecera con barra de color superior */
+header.sticky::before {
+  height: 3.5px;
+  background: linear-gradient(90deg,
+    #4f46e5 0%,
+    #6366f1 25%,
+    #0ea5e9 55%,
+    #10b981 80%,
+    #4f46e5 100%);
+  background-size: 200% 100%;
+  animation: shimmer-bar 4s linear infinite;
+}
+
+@keyframes shimmer-bar {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Botones bc-btn (usados en home) */
+.bc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  padding: 0.72rem 1.6rem;
+  font-size: 14.5px;
+  font-weight: 650;
+  text-decoration: none;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.22s ease,
+              background-color 0.18s ease,
+              color 0.18s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.bc-btn:active {
+  transform: scale(0.97);
+}
+
+.bc-btn--primary {
+  background: var(--pro-brand);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(79, 70, 229, 0.35);
+}
+
+.bc-btn--primary:hover {
+  background: var(--pro-brand-strong);
+  box-shadow: 0 6px 28px rgba(79, 70, 229, 0.45);
+  transform: translateY(-1px);
+}
+
+.bc-btn--ghost {
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--pro-ink);
+  border-color: var(--pro-line-strong);
+  backdrop-filter: blur(8px);
+}
+
+.bc-btn--ghost:hover {
+  background: #fff;
+  border-color: var(--pro-brand-line);
+  color: var(--pro-brand);
+  transform: translateY(-1px);
+}
+
+.bc-btn--outline {
+  background: transparent;
+  color: var(--pro-brand);
+  border-color: var(--pro-brand-line);
+}
+
+.bc-btn--outline:hover {
+  background: var(--pro-brand-soft);
+  transform: translateY(-1px);
+}
+
+.bc-btn--white {
+  background: #fff;
+  color: var(--pro-brand-strong);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.14);
+}
+
+.bc-btn--white:hover {
+  background: #f5f5ff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+}
+
+/* Tarjetas de curso */
+.bc-card-curso {
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--pro-line);
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 1px 4px rgba(16, 24, 40, 0.06), 0 10px 30px -18px rgba(16, 24, 40, 0.14);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.28s ease,
+              border-color 0.28s ease;
+}
+
+.bc-card-curso:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 2px 6px rgba(16, 24, 40, 0.07), 0 24px 56px -24px rgba(16, 24, 40, 0.24);
+  border-color: var(--pro-brand-line);
+}
+
+.bc-card-cover {
+  position: relative;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bc-card-icon {
+  font-size: 3rem;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));
+}
+
+.bc-card-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+
+.bc-card-body {
+  padding: 1.1rem 1.2rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.bc-card-titulo {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--pro-ink);
+  line-height: 1.3;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.bc-card-meta {
+  font-size: 12.5px;
+  color: var(--pro-muted-2);
+  margin: 0;
+}
+
+.bc-card-cta {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--pro-brand);
+  letter-spacing: 0.01em;
+  transition: gap 0.18s ease;
+}
+
+.bc-card-curso:hover .bc-card-cta {
+  letter-spacing: 0.04em;
+}
+
+/* Beneficios */
+.bc-beneficios-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.bc-beneficio {
+  background: #fff;
+  border: 1px solid var(--pro-line);
+  border-radius: 18px;
+  padding: 2rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 1px 4px rgba(16, 24, 40, 0.05), 0 8px 24px -16px rgba(16, 24, 40, 0.1);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
+}
+
+.bc-beneficio:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 2px 6px rgba(16, 24, 40, 0.06), 0 20px 48px -20px rgba(16, 24, 40, 0.18);
+}
+
+.bc-beneficio-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.bc-beneficio-titulo {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--pro-ink);
+  margin: 0;
+}
+
+.bc-beneficio-desc {
+  font-size: 14px;
+  color: var(--pro-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* CTA final */
+.bc-cta {
+  padding: clamp(3.5rem, 8vw, 6rem) 1.25rem;
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 45%, #1e3a5f 100%);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.bc-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 110%, rgba(99, 102, 241, 0.4), transparent);
+  pointer-events: none;
+}
+
+.bc-cta-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.bc-cta-title {
+  font-family: var(--pro-font-display);
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.bc-cta-desc {
+  font-size: 15.5px;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ================================================================== *
+ * 17. Mejoras visuales de impacto para la Home (hero + tarjetas)
+ * ================================================================== */
+
+/* Fondo del body más vivo con gradiente diagonal y orbs */
+body {
+  background-color: #f4f6fb;
+  background-image:
+    radial-gradient(ellipse 900px 700px at 0% -15%, rgba(79, 70, 229, 0.11), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 102% 0%, rgba(14, 165, 233, 0.09), transparent 55%),
+    radial-gradient(ellipse 600px 500px at 55% 110%, rgba(16, 185, 129, 0.07), transparent 55%),
+    linear-gradient(185deg, #f8f9ff 0%, #f4f6fb 50%, #f1f8f5 100%);
+}
+
+/* Hero section: más espacio, fondo con gradiente vibrante */
+main > section:first-child,
+main > div > section:first-child,
+[class*="min-h-"][class*="bg-"][class*="from-"] {
+  position: relative;
+}
+
+/* Potenciar el display-title con un gradiente de texto en la home */
+.display-title {
+  background: linear-gradient(145deg, #0b1220 0%, #1e1b4b 55%, #0b1220 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* El acento serif sigue siendo color brand */
+.serif-accent {
+  -webkit-text-fill-color: initial;
+  color: var(--pro-brand);
+}
+
+/* Cabecera con barra de color superior más gruesa y visible */
+header.sticky::before {
+  height: 3.5px;
+  background: linear-gradient(90deg,
+    #4f46e5 0%,
+    #6366f1 25%,
+    #0ea5e9 55%,
+    #10b981 80%,
+    #4f46e5 100%);
+  background-size: 200% 100%;
+  animation: shimmer-bar 4s linear infinite;
+}
+
+@keyframes shimmer-bar {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Botón primario más vistoso */
+.bg-blue-600,
+.bg-blue-700,
+[class*="bg-blue-600"],
+[class*="bg-blue-700"] {
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.22s ease !important;
+}
+
+a[class*="bg-blue-600"]:hover,
+button[class*="bg-blue-600"]:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 28px rgba(79, 70, 229, 0.42) !important;
+}
+
+/* Tarjetas de curso — efecto hover más dramático */
+article.group:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 4px 8px rgba(16, 24, 40, 0.06),
+            0 28px 64px -24px rgba(79, 70, 229, 0.22) !important;
+}
+
+/* Sección hero con mejor padding y fondo */
+section[class*="min-h-screen"] {
+  padding-top: clamp(4.5rem, 10vw, 8rem) !important;
+  padding-bottom: clamp(4rem, 8vw, 7rem) !important;
+}
+
+/* Eyebrow badge / pill más visible */
+.eyebrow,
+[class*="eyebrow"] {
+  background: linear-gradient(135deg, var(--pro-brand-soft), #e0f2fe);
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(79, 70, 229, 0.15);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--pro-brand);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.08);
+}
+
+/* Gradiente en el fondo de la section de estadísticas */
+section[class*="bg-\[linear-gradient"] {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Pie de página más refinado */
+footer {
+  background: linear-gradient(180deg, #f8f9ff, #f4f6fb) !important;
+}
+
+/* Mejorar las tarjetas de plan */
+.rounded-2xl.border.bg-white,
+.rounded-3xl.border.bg-white,
+.rounded-\[26px\].border.bg-white {
+  box-shadow: 0 1px 4px rgba(16, 24, 40, 0.05),
+            0 12px 36px -18px rgba(16, 24, 40, 0.14) !important;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.28s ease !important;
+}
+
+.rounded-2xl.border.bg-white:hover,
+.rounded-3xl.border.bg-white:hover,
+.rounded-\[26px\].border.bg-white:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 2px 6px rgba(16, 24, 40, 0.06),
+            0 24px 56px -20px rgba(79, 70, 229, 0.18) !important;
+}
+
+/* Mejorar los badges de nivel */
+span[class*="bg-blue-"][class*="text-blue-"],
+span[class*="bg-emerald-"],
+span[class*="bg-sky-"],
+span[class*="bg-violet-"] {
+  letter-spacing: 0.04em;
+  font-weight: 700 !important;
+}
+
+/* Links de navegación más definidos */
+.nav-link {
+  font-weight: 600 !important;
+  letter-spacing: -0.01em;
+}
+
+/* Mejorar los inputs del login/register */
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  background: #fafbff !important;
+}
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+  background: #fff !important;
+}
+
+/* Responsive: en móvil el display-title es más legible */
+@media (max-width: 640px) {
+  .display-title {
+    font-size: clamp(2rem, 9vw, 2.6rem);
+  }
+}
