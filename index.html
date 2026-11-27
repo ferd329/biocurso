@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4F46E5" />
+    <meta name="color-scheme" content="light" />
+    <meta name="robots" content="index, follow" />
+
+    <title>BioCursos — Biología y Química que sí se entienden</title>
+    <meta
+      name="description"
+      content="BioCursos — Cursos de Biología y Química para preparatoria y universidad. Clases claras, laboratorios interactivos y repaso inteligente."
+    />
+    <meta name="author" content="BioCursos" />
+
+    <!-- Vista previa en redes sociales -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:site_name" content="BioCursos" />
+    <meta property="og:title" content="BioCursos — Biología y Química que sí se entienden" />
+    <meta
+      property="og:description"
+      content="Cursos de Biología y Química para preparatoria y universidad. Clases claras, laboratorios interactivos y repaso inteligente."
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="BioCursos — Biología y Química que sí se entienden" />
+    <meta
+      name="twitter:description"
+      content="Cursos de Biología y Química para preparatoria y universidad. Clases claras, laboratorios interactivos y repaso inteligente."
+    />
+
+    <!-- Aplicación instalable (PWA) -->
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="application-name" content="BioCursos" />
+    <meta name="apple-mobile-web-app-title" content="BioCursos" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <!-- Datos estructurados para buscadores -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "BioCursos",
+        "description": "Plataforma de cursos de Biología y Química para preparatoria y universidad, con clases cortas, laboratorios interactivos y repaso inteligente.",
+        "areaServed": "MX",
+        "knowsLanguage": "es-MX",
+        "makesOffer": {
+          "@type": "Offer",
+          "category": "Cursos en línea de ciencias"
+        }
+      }
+    </script>
+
+    <!-- Tokens de marca y compatibilidad con las utilidades existentes -->
+    <style>
+      :root {
+        --brand-50: #eef2ff;
+        --brand-100: #e0e7ff;
+        --brand-200: #c7d2fe;
+        --brand-500: #6366f1;
+        --brand-600: #4f46e5;
+        --brand-700: #4338ca;
+        --brand-800: #3730a3;
+        --brand-900: #312e81;
+        --ink: #0b1220;
+        --muted: #5b6478;
+        --line: #e5e9f2;
+        --canvas: #f7f8fc;
+        --accent: #0ea5e9;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+      }
+
+      .bg-blue-50 { background-color: var(--brand-50) !important; }
+      .bg-blue-100 { background-color: var(--brand-100) !important; }
+      .bg-blue-500 { background-color: var(--brand-500) !important; }
+      .bg-blue-600 { background-color: var(--brand-600) !important; }
+      .bg-blue-700 { background-color: var(--brand-700) !important; }
+      .bg-blue-900 { background-color: var(--ink) !important; }
+
+      .text-blue-500 { color: var(--brand-500) !important; }
+      .text-blue-600 { color: var(--brand-600) !important; }
+      .text-blue-700 { color: var(--brand-700) !important; }
+      .text-blue-800 { color: var(--brand-800) !important; }
+      .text-blue-900 { color: var(--ink) !important; }
+
+      .border-blue-200 { border-color: var(--brand-200) !important; }
+      .border-blue-500 { border-color: var(--brand-500) !important; }
+      .border-blue-600 { border-color: var(--brand-600) !important; }
+
+      .hover\:bg-blue-100:hover { background-color: var(--brand-100) !important; }
+      .hover\:bg-blue-50:hover { background-color: var(--brand-50) !important; }
+      .hover\:text-blue-600:hover { color: var(--brand-600) !important; }
+      .hover\:text-blue-700:hover { color: var(--brand-700) !important; }
+
+      .focus\:border-blue-500:focus { border-color: var(--brand-500) !important; }
+      .focus\:ring-blue-500:focus { box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.14) !important; }
+    </style>
+    <!-- Icono del sitio -->
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+
+    <!-- Tipografías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Estilos (Tailwind compilado + estilos propios) -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <!-- Capa de diseño profesional (se carga al final para refinar la UI) -->
+    <link rel="stylesheet" href="assets/css/professional.css" />
+    <!-- Override visual — paleta azul, todo legible -->
+    <style>
+      /* ── FONDO ── */
+      html, body {
+        background: #e8f0fe !important;
+        background-image:
+          radial-gradient(ellipse 80% 50% at 10% -10%, rgba(37,99,235,0.18) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 40% at 90% 110%, rgba(14,165,233,0.14) 0%, transparent 55%),
+          linear-gradient(175deg, #dbeafe 0%, #eff6ff 40%, #f0f9ff 100%) !important;
+        background-attachment: fixed !important;
+      }
+      #root { background: transparent !important; }
+
+      /* ── HEADER ── */
+      header, header.sticky {
+        background: rgba(255,255,255,0.88) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border-bottom: 1px solid #bfdbfe !important;
+        box-shadow: 0 1px 0 #dbeafe, 0 4px 24px rgba(37,99,235,0.08) !important;
+      }
+      header.sticky::before {
+        content: "" !important;
+        position: absolute !important;
+        inset: 0 0 auto 0 !important;
+        height: 3px !important;
+        background: linear-gradient(90deg, #2563eb, #38bdf8, #0ea5e9, #2563eb) !important;
+        background-size: 300% 100% !important;
+        animation: hbar 4s linear infinite !important;
+      }
+      @keyframes hbar { to { background-position: 300% 0; } }
+
+      /* Nav links */
+      .nav-link { color: #1e40af !important; font-weight: 600 !important; }
+      .nav-link:hover { background: #dbeafe !important; color: #1d4ed8 !important; }
+
+      /* ── TITULOS Y TEXTOS ── */
+      h1, h2, h3, h4, h5, .display-title {
+        color: #1e3a8a !important;
+        -webkit-text-fill-color: #1e3a8a !important;
+        background: none !important;
+        text-shadow: none !important;
+      }
+      .serif-accent {
+        color: #2563eb !important;
+        -webkit-text-fill-color: #2563eb !important;
+      }
+      p, li, span {
+        color: #1e40af;
+      }
+      .text-ink, [class*="text-ink"] { color: #1e3a8a !important; }
+      [class*="text-slate-500"], [class*="text-slate-400"],
+      [class*="text-slate-600"], [class*="text-gray-500"],
+      [class*="text-gray-600"] { color: #3b82f6 !important; }
+
+      /* ── EYEBROW ── */
+      .eyebrow {
+        background: #dbeafe !important;
+        border: 1px solid #93c5fd !important;
+        color: #1d4ed8 !important;
+        border-radius: 999px !important;
+        padding: 0.28rem 0.9rem !important;
+        font-size: 11px !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.15em !important;
+      }
+
+      /* ── BOTONES PRIMARIOS ── */
+      a[class*="bg-blue-6"], button[class*="bg-blue-6"],
+      a[class*="bg-blue-7"], button[class*="bg-blue-7"] {
+        background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
+        color: #fff !important;
+        border-radius: 999px !important;
+        font-weight: 700 !important;
+        box-shadow: 0 4px 18px rgba(37,99,235,0.35) !important;
+        transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+      }
+      a[class*="bg-blue-6"]:hover, button[class*="bg-blue-6"]:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 28px rgba(37,99,235,0.5) !important;
+      }
+
+      /* ── TARJETAS ── */
+      article.group,
+      .rounded-2xl.border, .rounded-3xl.border,
+      .rounded-\[20px\].border, .rounded-\[26px\].border {
+        background: rgba(255,255,255,0.75) !important;
+        border-color: #bfdbfe !important;
+        backdrop-filter: blur(12px) !important;
+        box-shadow: 0 1px 3px rgba(37,99,235,0.07), 0 10px 32px rgba(37,99,235,0.1) !important;
+        transition: transform 0.26s ease, box-shadow 0.26s ease, border-color 0.26s ease !important;
+      }
+      article.group:hover, .rounded-2xl.border:hover, .rounded-3xl.border:hover {
+        transform: translateY(-5px) !important;
+        border-color: #93c5fd !important;
+        box-shadow: 0 4px 8px rgba(37,99,235,0.1), 0 24px 56px rgba(37,99,235,0.18) !important;
+      }
+
+      /* Thumbnails / placeholders */
+      [class*="bg-blue-100"], [class*="bg-blue-50"],
+      [class*="bg-slate-100"] {
+        background: linear-gradient(135deg, #dbeafe, #eff6ff) !important;
+      }
+
+      /* Secciones y contenedores */
+      section, main > div, .container-page {
+        background: transparent !important;
+      }
+
+      /* Sección oscura (estadísticas hero) */
+      [class*="bg-\[linear-gradient(135deg,#0F172A"],
+      [class*="bg-\[linear-gradient(135deg,#0f172a"] {
+        background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #0369a1 100%) !important;
+      }
+      [class*="bg-\[linear-gradient(135deg,#0F172A"] *,
+      [class*="bg-\[linear-gradient(135deg,#0f172a"] * {
+        color: rgba(255,255,255,0.9) !important;
+        -webkit-text-fill-color: rgba(255,255,255,0.9) !important;
+      }
+
+      /* ── FORMULARIOS ── */
+      .bg-white\/95, .bg-white\/90, .rounded-2xl.bg-white {
+        background: rgba(255,255,255,0.95) !important;
+        border: 1px solid #bfdbfe !important;
+        box-shadow: 0 8px 40px rgba(37,99,235,0.14) !important;
+      }
+      input, textarea, select {
+        background: #f0f7ff !important;
+        border-color: #93c5fd !important;
+        color: #1e3a8a !important;
+      }
+      input::placeholder, textarea::placeholder { color: #93c5fd !important; }
+      input:focus, textarea:focus {
+        background: #fff !important;
+        border-color: #2563eb !important;
+        box-shadow: 0 0 0 4px rgba(37,99,235,0.15) !important;
+        outline: none !important;
+      }
+      label { color: #1e40af !important; }
+
+      /* ── FOOTER ── */
+      footer {
+        background: linear-gradient(180deg, #dbeafe, #bfdbfe) !important;
+        border-top: 1px solid #93c5fd !important;
+      }
+      footer * { color: #1e40af !important; }
+      footer a:hover { color: #1d4ed8 !important; }
+
+      /* ── SCROLLBAR ── */
+      ::-webkit-scrollbar-track { background: #dbeafe !important; }
+      ::-webkit-scrollbar-thumb {
+        background: #93c5fd !important;
+        border-color: #dbeafe !important;
+      }
+      ::-webkit-scrollbar-thumb:hover { background: #3b82f6 !important; }
+
+      /* ── ANIMACIÓN ── */
+      @keyframes fadeUp {
+        from { opacity:0; transform:translateY(16px); }
+        to   { opacity:1; transform:translateY(0); }
+      }
+      main > section, main > div > section {
+        animation: fadeUp 0.55s cubic-bezier(0.22,1,0.36,1) both !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Enlace de salto para lectores de pantalla y navegación con teclado -->
+    <a class="skip-link" href="#main-content" id="skip-link">Saltar al contenido principal</a>
+
+    <!-- Punto de montaje de la aplicación React -->
+    <div id="root"></div>
+
+    <noscript>
+      <div
+        style="
+          max-width: 32rem;
+          margin: 15vh auto;
+          padding: 2rem;
+          font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+          text-align: center;
+          color: #0f172a;
+        "
+      >
+        <h1 style="font-size: 1.5rem; margin-bottom: 0.75rem">BioCursos necesita JavaScript</h1>
+        <p style="color: #475569; line-height: 1.6">
+          Activa JavaScript en tu navegador para ver los cursos, el aula virtual y el panel de
+          administración.
+        </p>
+      </div>
+    </noscript>
+
+    <!-- Datos semilla (debe cargarse antes que la aplicación) -->
+    <script src="assets/js/data.js"></script>
+
+    <!-- Aplicación (React + React Router) -->
+    <script src="assets/js/app.js"></script>
+
+    <script>
+      // ── Búsqueda y filtros de cursos ─────────────────────────────────────
+      // Se inyecta una barra de búsqueda + filtros sobre el catálogo renderizado
+      (function () {
+        var INSERTED = false;
+
+        function buildUI() {
+          if (INSERTED) return;
+
+          // Buscar el contenedor del catálogo de cursos (artículos con class "group")
+          var articles = document.querySelectorAll("article.group");
+          if (articles.length < 2) return; // catálogo todavía no renderizado
+
+          // Buscar el padre común
+          var container = articles[0].parentElement;
+          if (!container) return;
+
+          INSERTED = true;
+
+          // ── Crear barra de búsqueda + filtros ──
+          var bar = document.createElement("div");
+          bar.id = "bc-search-bar";
+          bar.style.cssText = [
+            "display:flex",
+            "flex-wrap:wrap",
+            "gap:0.6rem",
+            "align-items:center",
+            "margin-bottom:1.5rem",
+            "padding:1rem 1.25rem",
+            "background:rgba(255,255,255,0.88)",
+            "border:1px solid #bfdbfe",
+            "border-radius:16px",
+            "box-shadow:0 2px 12px rgba(37,99,235,0.08)",
+            "backdrop-filter:blur(10px)",
+          ].join(";");
+
+          // Input de búsqueda
+          var input = document.createElement("input");
+          input.type = "search";
+          input.placeholder = "🔍  Buscar curso…";
+          input.style.cssText = [
+            "flex:1",
+            "min-width:160px",
+            "border:1.5px solid #93c5fd",
+            "border-radius:999px",
+            "padding:0.5rem 1rem",
+            "font-size:14px",
+            "outline:none",
+            "background:#f0f7ff",
+            "color:#1e3a8a",
+            "transition:border-color 0.2s",
+          ].join(";");
+          input.addEventListener("focus", function () {
+            input.style.borderColor = "#2563eb";
+            input.style.boxShadow = "0 0 0 3px rgba(37,99,235,0.15)";
+          });
+          input.addEventListener("blur", function () {
+            input.style.borderColor = "#93c5fd";
+            input.style.boxShadow = "none";
+          });
+
+          // Selector de área
+          var selArea = buildSelect(["Todas las áreas", "Biología", "Química"]);
+          // Selector de nivel
+          var selNivel = buildSelect(["Todos los niveles", "Preparatoria", "Universitario"]);
+          // Selector de orden
+          var selOrder = buildSelect(["Más populares", "Menor precio", "Mayor precio", "Mejor calificación"]);
+
+          // Contador de resultados
+          var counter = document.createElement("span");
+          counter.style.cssText = "font-size:12px;color:#3b82f6;white-space:nowrap;font-weight:600;";
+
+          bar.appendChild(input);
+          bar.appendChild(selArea);
+          bar.appendChild(selNivel);
+          bar.appendChild(selOrder);
+          bar.appendChild(counter);
+          container.parentElement.insertBefore(bar, container);
+
+          // ── Lógica de filtrado ──
+          function getArticles() {
+            return Array.from(document.querySelectorAll("article.group"));
+          }
+
+          function getCardData(el) {
+            var text = el.innerText || el.textContent || "";
+            return {
+              text: text.toLowerCase(),
+              area: (el.dataset.area || "").toLowerCase(),
+              nivel: (el.dataset.nivel || "").toLowerCase(),
+              precio: parseFloat(el.dataset.precio) || 0,
+              rating: parseFloat(el.dataset.rating) || 0,
+              el: el,
+            };
+          }
+
+          // Intentar enriquecer las tarjetas con datos del JSON semilla
+          function enrichCards() {
+            if (!window.BioCursosDatos) return;
+            var cursos = window.BioCursosDatos.cursos || [];
+            var arts = getArticles();
+            arts.forEach(function (art) {
+              var title = (art.querySelector("h3,h2,[class*='font-semibold'],[class*='font-medium']") || {}).innerText || "";
+              var match = cursos.find(function (c) {
+                return (c.titulo || "").toLowerCase().includes(title.toLowerCase().slice(0, 10));
+              });
+              if (match) {
+                art.dataset.area = match.area || "";
+                art.dataset.nivel = match.nivel_educativo || "";
+                art.dataset.precio = match.precio_individual || "0";
+                art.dataset.rating = match.rating || "0";
+              }
+            });
+          }
+
+          enrichCards();
+
+          function applyFilters() {
+            var query = input.value.toLowerCase().trim();
+            var area = selArea.value;
+            var nivel = selNivel.value;
+            var order = selOrder.value;
+            var arts = getArticles();
+            var visible = [];
+
+            arts.forEach(function (art) {
+              var d = getCardData(art);
+              var show = true;
+              if (query && !d.text.includes(query)) show = false;
+              if (area !== "Todas las áreas" && d.area && !d.area.includes(area.toLowerCase())) show = false;
+              if (nivel !== "Todos los niveles" && d.nivel && !d.nivel.includes(nivel.toLowerCase())) show = false;
+              art.style.display = show ? "" : "none";
+              if (show) visible.push({ el: art, d: d });
+            });
+
+            // Ordenar
+            if (order === "Menor precio") visible.sort(function (a, b) { return a.d.precio - b.d.precio; });
+            else if (order === "Mayor precio") visible.sort(function (a, b) { return b.d.precio - a.d.precio; });
+            else if (order === "Mejor calificación") visible.sort(function (a, b) { return b.d.rating - a.d.rating; });
+
+            visible.forEach(function (item) { container.appendChild(item.el); });
+
+            var total = visible.length;
+            counter.textContent = total + " curso" + (total !== 1 ? "s" : "");
+
+            // Mensaje vacío
+            var empty = document.getElementById("bc-empty");
+            if (total === 0) {
+              if (!empty) {
+                empty = document.createElement("div");
+                empty.id = "bc-empty";
+                empty.style.cssText = "text-align:center;padding:3rem 1rem;color:#3b82f6;font-size:15px;font-weight:600;grid-column:1/-1;";
+                empty.innerHTML = "😕 No encontramos cursos con esos filtros. <br><small style='font-weight:400;color:#93c5fd'>Intenta con otra búsqueda.</small>";
+                container.appendChild(empty);
+              }
+            } else if (empty) {
+              empty.remove();
+            }
+          }
+
+          input.addEventListener("input", applyFilters);
+          selArea.addEventListener("change", applyFilters);
+          selNivel.addEventListener("change", applyFilters);
+          selOrder.addEventListener("change", applyFilters);
+          applyFilters();
+        }
+
+        function buildSelect(options) {
+          var sel = document.createElement("select");
+          sel.style.cssText = [
+            "border:1.5px solid #93c5fd",
+            "border-radius:999px",
+            "padding:0.45rem 0.9rem",
+            "font-size:13px",
+            "background:#f0f7ff",
+            "color:#1e40af",
+            "font-weight:600",
+            "cursor:pointer",
+            "outline:none",
+          ].join(";");
+          options.forEach(function (o) {
+            var opt = document.createElement("option");
+            opt.value = o;
+            opt.textContent = o;
+            sel.appendChild(opt);
+          });
+          return sel;
+        }
+
+        // Observar el DOM hasta que el catálogo esté listo
+        var observer = new MutationObserver(function () {
+          buildUI();
+        });
+        observer.observe(document.getElementById("root") || document.body, {
+          childList: true,
+          subtree: true,
+        });
+        // También intentar al cargar
+        window.addEventListener("load", buildUI);
+        window.addEventListener("hashchange", function () {
+          INSERTED = false;
+          var bar = document.getElementById("bc-search-bar");
+          if (bar) bar.remove();
+          setTimeout(buildUI, 400);
+        });
+      })();
+    </script>
+
+    <script>
+      // ── Validaciones en formularios de Login / Register ──────────────────
+      // El bundle app.js maneja sus propios formularios con validación interna.
+      // Este script refuerza visualmente cuando hay errores de red/servidor
+      // y muestra mensajes inline si la API falla.
+      (function () {
+        function styleErrorBanner(form, msg) {
+          var existing = form.querySelector(".bc-form-error");
+          if (existing) existing.remove();
+          var div = document.createElement("div");
+          div.className = "bc-form-error";
+          div.style.cssText = [
+            "display:flex",
+            "align-items:center",
+            "gap:0.5rem",
+            "background:#fef2f2",
+            "border:1px solid #fca5a5",
+            "border-radius:12px",
+            "padding:0.75rem 1rem",
+            "margin-bottom:1rem",
+            "font-size:13px",
+            "color:#b91c1c",
+            "font-weight:600",
+          ].join(";");
+          div.innerHTML = "⚠️ " + msg;
+          form.insertBefore(div, form.firstChild);
+        }
+
+        // Observar formularios
+        var observer = new MutationObserver(function () {
+          document.querySelectorAll("form:not([data-bc-patched])").forEach(function (form) {
+            form.setAttribute("data-bc-patched", "1");
+            form.addEventListener("submit", function (e) {
+              var inputs = form.querySelectorAll("input[type=email], input[type=password], input[type=text]");
+              var errors = [];
+              inputs.forEach(function (inp) {
+                var val = inp.value.trim();
+                // Email
+                if (inp.type === "email" && val && !/^\S+@\S+\.\S+$/.test(val)) {
+                  errors.push("Escribe un correo válido.");
+                  inp.style.borderColor = "#f87171";
+                  inp.style.background = "#fef2f2";
+                }
+                // Contraseña
+                if (inp.type === "password" && val && val.length < 6) {
+                  errors.push("La contraseña debe tener al menos 6 caracteres.");
+                  inp.style.borderColor = "#f87171";
+                  inp.style.background = "#fef2f2";
+                }
+              });
+              if (errors.length > 0) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                styleErrorBanner(form, errors[0]);
+              }
+            }, true);
+          });
+        });
+        observer.observe(document.getElementById("root") || document.body, {
+          childList: true,
+          subtree: true,
+        });
+      })();
+      (function () {
+        var link = document.getElementById("skip-link");
+        if (!link) return;
+        link.addEventListener("click", function (event) {
+          event.preventDefault();
+          var main = document.getElementById("main-content");
+          if (!main) return;
+          main.setAttribute("tabindex", "-1");
+          main.focus({ preventScroll: true });
+          main.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      })();
+
+      // Registro del service worker (sólo en http/https; no aplica con file://).
+      if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("sw.js").catch(function () {
+            /* Sin conexión disponible: el sitio sigue funcionando. */
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

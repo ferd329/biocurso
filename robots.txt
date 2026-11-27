@@ -1,0 +1,9 @@
+# BioCursos — robots.txt
+# Sustituye el dominio del sitemap por el definitivo antes de publicar.
+
+User-agent: *
+Allow: /
+Disallow: /backend/
+Disallow: /frontend/
+
+Sitemap: https://biocursos.mx/sitemap.xml

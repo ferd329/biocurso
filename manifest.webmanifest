@@ -1,0 +1,45 @@
+{
+  "name": "BioCursos — Biología y Química",
+  "short_name": "BioCursos",
+  "description": "Cursos de Biología y Química para preparatoria y universidad: clases cortas, laboratorios interactivos y repaso inteligente.",
+  "lang": "es-MX",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f6f7fb",
+  "theme_color": "#4f46e5",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "assets/img/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ver cursos",
+      "short_name": "Cursos",
+      "url": "./#/"
+    },
+    {
+      "name": "Planes",
+      "short_name": "Planes",
+      "url": "./#/planes"
+    },
+    {
+      "name": "Iniciar sesión",
+      "short_name": "Entrar",
+      "url": "./#/login"
+    }
+  ]
+}
